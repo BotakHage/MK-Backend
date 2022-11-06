@@ -54,10 +54,10 @@ class StudentController extends Controller
     {
         $student = Student::find($id);
 
-        $student->nama = $request->get('nama');
-        $student->nim = $request->get('nim');
-        $student->email = $request->get('email');
-        $student->jurusan = $request->get('jurusan');
+        $student->nama = $request->get('nama') ?? $student->nama;
+        $student->nim = $request->get('nim') ?? $student->nim;
+        $student->email = $request->get('email') ?? $student->email;
+        $student->jurusan = $request->get('jurusan') ?? $student->jurusan;
 
         // $student->nama = $request->input('nama') ?? $student->nama;
 
