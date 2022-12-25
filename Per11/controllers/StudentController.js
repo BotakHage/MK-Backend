@@ -23,26 +23,20 @@ class StudentController {
      * Mengembalikan response dalam bentuk json.
      */
     // code here
-    const creates = await Student.create();
+    const { nama } = req.body;
+    const { nim } = req.body;
+    const { email } = req.body;
+    const { jurusan } = req.body;
+
+    const students = await Student.create(nama, nim, email, jurusan);
 
     const data = {
       message: 'Menambahkan data student',
-      data: creates,
-    };
-
-    res.json(data);
-  }
-
-  /**
-   * const { nama } = req.body;
-    students.push(nama);
-    const data = {
-      message: `Menambahkan data students: ${nama}`,
       data: students,
     };
+
     res.json(data);
   }
-   */
 
   update(req, res) {
     const { id } = req.params;

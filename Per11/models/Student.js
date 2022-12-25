@@ -23,15 +23,16 @@ class Student {
    * Method menerima parameter data yang akan diinsert.
    * Method mengembalikan data student yang baru diinsert.
    */
-  static create() {
+  static create(nama, nim, email, jurusan) {
     // code here
     return new Promise((resolve, reject) => {
-      const sql = 'INSERT INTO students SET ?';
+      const sql = 'INSERT INTO students SET VALUES (default,"${nama}", "${nim}", "${email}", "${jurusan}", now(), now())';
 
-      // (nama, nim, email, jurusan) VALUES (${students.nama}, ${students.nim}, ${students.email}, ${students.jurusan})';
+      const view = `SELECT * FROM students where nim = "${nim}"`;
 
-      db.query(sql, students, function (err, results) {
-        err ? console.log(err) : console.log(results);
+      db.query(sql);
+      db.query(view, (err, results) => {
+        resolve(results);
       });
     });
   }
